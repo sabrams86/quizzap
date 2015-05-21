@@ -61,54 +61,58 @@ $(document).ready(function(){
     $('.guess').remove();
     $('body').append(photo);
     $('body').append(form);
-  });
+
+
+
 
   //process user input and return answer along with new photo
+  for (var i = 0; i < shuffledPhotos.length; i++) {
+    var userInput = $('input[name="name"]').val();
+    var nameGuess = userInput.toLowerCase();
+    var answer = $('img').attr('alt');
+    var photo = '<img class="photo" alt="'+shuffledPhotos[i][0]+'" src="'+shuffledPhotos[i][1]+'">';
+    var winner = '<h3 class="message">Nice Work!</h3>';
+    var loser = '<h3 class="message">Sorry, that was actually '+answer+'</h3>';
+    var counter = 0;
+    var score = '<h3 class="score">Your score so far:  '+counter+'</h3>';
 
-   $(document).on('click', '.try', function(){
+    if (i === shuffledPhotos.length) {
+      $('.try').click(function(){
+        $('body').append('<h3>Game over!</h3>');
+      });
+    }
+    else if (nameGuess === answer) {
+      $('.try').click(function(){
+        counter = counter + 1;
+        $('.try').remove();
+        $('.photo').remove();
+        $('.form').remove();
+        $('.message').remove();
+        //$('.score').remove();
+        $('body').append(winner);
+        //$('body').append(score);
+        $('body').append(photo);
+        $('body').append(form);
+      });
+    }
+    else{
+      $('.try').click(function(){
+        $('.try').remove();
+        $('.photo').remove();
+        $('.form').remove();
+        $('.message').remove();
+        //$('.score').remove();
+        $('body').append(loser);
+        //$('body').append(score);
+        $('body').append(photo);
+        $('body').append(form);
+      });
+    }
 
-     //if input matches the name, return a winner message and display next image
-     var userInput = $('input[name="name"]').val();
-     var nameGuess = userInput.toLowerCase();
-     var answer = $('img').attr('alt');
-     var randomPhoto = photoSet[Math.floor(Math.random()*photoSet.length)];
-     var photo = '<img class="photo" alt="'+randomPhoto[0]+'" src="'+randomPhoto[1]+'">';
-     var winner = '<h3 class="message">Nice Work!</h3>';
-     var loser = '<h3 class="message">Sorry, that was actually '+answer+'</h3>';
-     var counter = 0;
-     var score = '<h3 class="score">Your score so far:  '+counter+'</h3>';
 
-     for (var i = 0; i < photoSet.length; i++) {
 
-       if (i === photoSet.length) {
-         $('body').append('<h3>Game over!</h3>');
-       }
-       else if (nameGuess === answer) {
-         counter = counter + 1;
-         $('.try').remove();
-         $('.photo').remove();
-         $('.form').remove();
-         $('.message').remove();
-         //$('.score').remove();
-         $('body').append(winner);
-         //$('body').append(score);
-         $('body').append(photo);
-         $('body').append(form);
-       }
-       //else return, sorry message with correct name and display next image
-       else{
-         $('.try').remove();
-         $('.photo').remove();
-         $('.form').remove();
-         $('.message').remove();
-         //$('.score').remove();
-         $('body').append(loser);
-         //$('body').append(score);
-         $('body').append(photo);
-         $('body').append(form);
-       }
 
-     }
+ }
 
-   });
+});
 });
