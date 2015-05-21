@@ -9,7 +9,26 @@ $(document).ready(function(){
                       ['barry', 'assets/images/card_barry.jpg'],
                       ['roberto', 'assets/images/card_berto_2.jpg'],
                       ['brian', 'assets/images/card_brian_3.jpg'],
-                      ['vishwam', 'assets/images/card_vishwam.jpg']]
+                      ['vishwam', 'assets/images/card_vishwam.jpg'],
+                      ['carrie','assets/images/card_carrie.jpg'],
+                      ['claire','assets/images/card_claire.jpg'],
+                      ['derek','assets/images/card_derek_v.jpg'],
+                      ['derek','assets/images/card_derek.jpg'],
+                      ['dylan','assets/images/card_dylan.jpg'],
+                      ['jacob','assets/images/card_jacob.jpg'],
+                      ['jared','assets/images/card_jared.jpg'],
+                      ['jaylyn','assets/images/card_jaylyn.jpg'],
+                      ['john','assets/images/card_john.jpg'],
+                      ['judy','assets/images/card_judylin.jpg'],
+                      ['lucas','assets/images/card_lucas.jpg'],
+                      ['mattias','assets/images/card_mattias.jpg'],
+                      ['micah','assets/images/card_micah.jpg'],
+                      ['nick','assets/images/card_nick.jpg'],
+                      ['sam','assets/images/card_sam.jpg'],
+                      ['steve','assets/images/card_steve.jpg'],
+                      ['szilvia','assets/images/card_szilvia.jpg'],
+                      ['trevor','assets/images/card_trevor.jpg'],
+                      ['zack','assets/images/card_zack.jpg']];
 
 
   //define js variables
@@ -18,8 +37,19 @@ $(document).ready(function(){
                 <button type="button" name="submit" class="try">Submit</button></div>';
 
 
+  // random shuffle of array: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  // perhaps first create a shuffled array, then loop through the new array
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+  }
 
-
+  var shuffledPhotos = shuffleArray(photoSet);
   // start the game when the user clicks the button
   $('.start').click(function(){
     //randomly choose an item from an object and return it's key
@@ -48,7 +78,7 @@ $(document).ready(function(){
      var counter = 0;
      var score = '<h3 class="score">Your score so far:  '+counter+'</h3>';
 
-     for (var i=0; i < photoSet.length; i++) {
+     for (var i = 0; i < photoSet.length; i++) {
 
        if (i === photoSet.length) {
          $('body').append('<h3>Game over!</h3>');
