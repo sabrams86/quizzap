@@ -31,7 +31,7 @@ $(document).ready(function(){
                   ['zack','assets/images/card_zack.jpg']];
 
 
-
+  var maxScore = photoSet.length;
 
   // random shuffle of array: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   // perhaps first create a shuffled array, then loop through the new array
@@ -71,7 +71,8 @@ $(document).ready(function(){
     var winner = '<h3 class="message">Nice Work!</h3>';
     var loser = '<h3 class="message">Sorry, that was actually '+answer+'</h3>';
 
-    var score = '<h3 class="score">Your score so far:  '+counter+'</h3>';
+    var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
+    var final = '<h3 class="finalscore">Final Score:  '+counter+' / '+maxScore+'</h3>';
     if (shuffledPhotos.length>0){
       var photo = '<img class="photo" alt="'+shuffledPhotos[shuffledPhotos.length-1][0]+'" src="'+shuffledPhotos[shuffledPhotos.length-1][1]+'">';
     }
@@ -79,22 +80,23 @@ $(document).ready(function(){
         console.log('over');
         $('.form').remove();
         $('.photo').remove();
+        $('.score').remove();
+        $('#game').append(final);
         $('#game').append('<h3>Game over!</h3>');
         $('#game').append(playAgain);
       }
       else if (nameGuess === answer) {
-
         counter = counter + 1;
         $('.try').remove();
         $('.photo').remove();
         $('.form').remove();
         $('.message').remove();
-        //$('.score').remove();
+        $('.score').remove();
         $('#game').append(winner);
-        //$('#game').append(score);
+        $('#game').append(score);
         $('#game').append(photo);
         $('#game').append(form);
-        photoSet.pop();
+        shuffledPhotos.pop();
         console.log(shuffledPhotos.length);
         console.log(counter);
       }
@@ -104,12 +106,12 @@ $(document).ready(function(){
         $('.photo').remove();
         $('.form').remove();
         $('.message').remove();
-        //$('.score').remove();
+        $('.score').remove();
         $('#game').append(loser);
-        //$('#game').append(score);
+        $('#game').append(score);
         $('#game').append(photo);
         $('#game').append(form);
-        photoSet.pop();
+        shuffledPhotos.pop();
         console.log(shuffledPhotos.length);
       }
 
