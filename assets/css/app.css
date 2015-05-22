@@ -35,7 +35,13 @@ html, body {
 	color: #474747;
 	margin: 0 auto;
 }
-
+#game{
+	margin-right:auto;
+	margin-left:auto;
+	align-content: center;
+	align-self: center;
+	text-align: center;
+}
 #banner p{
   color: white;
 }
@@ -78,7 +84,7 @@ h3 {
 }
 
 .try, .start{
-	display: block;
+	display: inline-block;
 	text-align: center;
 	width: 32%;
 	margin: 0px;
@@ -86,7 +92,10 @@ h3 {
 	height: 40px;
 }
 
-
+.retry{
+	height: 100px;
+	width: 300px;
+}
 
 p, li, ul {
 	font-size: 20px;
