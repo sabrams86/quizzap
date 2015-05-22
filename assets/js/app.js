@@ -68,10 +68,11 @@ $(document).ready(function(){
     var userInput = $('input[name="name"]').val();
     var nameGuess = userInput.toLowerCase();
     var answer = $('img').attr('alt');
+    var displayAnswer = answer.charAt(0).toUpperCase() + answer.slice(1);
     var winner = '<h3 class="message">Nice Work!</h3>';
-    var loser = '<h3 class="message">Sorry, that was actually '+answer+'</h3>';
+    var loser = '<h3 class="message">Sorry, that was actually '+displayAnswer+'</h3>';
 
-    var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
+
     var final = '<h3 class="finalscore">Final Score:  '+counter+' / '+maxScore+'</h3>';
     if (shuffledPhotos.length>0){
       var photo = '<img class="photo" alt="'+shuffledPhotos[shuffledPhotos.length-1][0]+'" src="'+shuffledPhotos[shuffledPhotos.length-1][1]+'">';
@@ -92,6 +93,7 @@ $(document).ready(function(){
         $('.form').remove();
         $('.message').remove();
         $('.score').remove();
+        var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
         $('#game').append(winner);
         $('#game').append(score);
         $('#game').append(photo);
@@ -107,6 +109,7 @@ $(document).ready(function(){
         $('.form').remove();
         $('.message').remove();
         $('.score').remove();
+        var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
         $('#game').append(loser);
         $('#game').append(score);
         $('#game').append(photo);
