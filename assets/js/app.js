@@ -88,7 +88,7 @@ $(document).ready(function(){
     var displayAnswer = answer.charAt(0).toUpperCase() + answer.slice(1);
     var winner = '<h3 class="message">Nice Work!</h3>';
     var loser = '<h3 class="message">Sorry, that was actually '+displayAnswer+'</h3>';
-    var final = '<h3 class="finalscore">Final Score:  '+counter+' / '+maxScore+'</h3>';
+
 
 
     if (shuffledPhotos.length>0){
@@ -103,11 +103,13 @@ $(document).ready(function(){
       }else{
         penalty = penalty + 5;
       }
+      var final = '<h3 class="finalscore">Final Score:  '+counter+' / '+maxScore+'</h3>';
       $('.form').remove();
       $('.photo').remove();
       $('.score').remove();
       var endTime = new Date();
       var totalTime = (endTime.getTime() - startTime.getTime())/1000;
+      console.log(counter);
       console.log(totalTime);
       $('#game').append(final);
       console.log(penalty);
