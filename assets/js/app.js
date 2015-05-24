@@ -99,6 +99,7 @@ $(document).ready(function(){
       //if the array is empty (all photos have been shown) clear the board and put the game over message up
       //along with a button to restart the game
       if (nameGuess === answer) {
+        counter = counter + 1;
       }else{
         penalty = penalty + 5;
       }
