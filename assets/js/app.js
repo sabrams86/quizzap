@@ -15,7 +15,7 @@ $(document).ready(function(){
                   ['derek','assets/images/card_derek_v.jpg'],
                   ['derek','assets/images/card_derek.jpg'],
                   ['dylan','assets/images/card_dylan.jpg'],
-                  ['jacob','assets/images/card_jacob.jpg'],
+                  ['jake','assets/images/card_jacob.jpg'],
                   ['jared','assets/images/card_jared.jpg'],
                   ['jaylyn','assets/images/card_jaylyn.jpg'],
                   ['john','assets/images/card_john.jpg'],
@@ -46,13 +46,17 @@ $(document).ready(function(){
   }
   var counter = 0;
   var shuffledPhotos = shuffleArray(photoSet);
-  var form = '<div class="form"><br>Who is this? (first name only)<br> \
+  var form = '<div class="form">\
+              <form action="#" method="get">\
+              <br>Who is this? (first name only)<br> \
               <input type="text" name="name" autofocus><br><br> \
-              <button type="button" name="submit" class="try">Submit</button></div>';
+              <input type="submit" name="submit" value="Submit" class="try">\
+              </form></div>';
   var playAgain = '<form action="index.html" method="get"><input class="retry" type="submit" name="again" value="Play Again!"></form>';
 
   // start the game when the user clicks the button
   $('.start').click(function(){
+    event.preventDefault();
     var photo = '<img class="photo" alt="'+shuffledPhotos[shuffledPhotos.length-1][0]+'" src="'+shuffledPhotos[shuffledPhotos.length-1][1]+'">';
     //start loop around photo array
     $('.start').remove();
@@ -63,7 +67,7 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.try', function(){
-
+    event.preventDefault();
     //if input matches the name, return a winner message and display next image
     var userInput = $('input[name="name"]').val();
     var nameGuess = userInput.toLowerCase();
@@ -78,7 +82,6 @@ $(document).ready(function(){
       var photo = '<img class="photo" alt="'+shuffledPhotos[shuffledPhotos.length-1][0]+'" src="'+shuffledPhotos[shuffledPhotos.length-1][1]+'">';
     }
       if (shuffledPhotos.length === 0) {
-        console.log('over');
         $('.form').remove();
         $('.photo').remove();
         $('.score').remove();
@@ -99,8 +102,6 @@ $(document).ready(function(){
         $('#game').append(photo);
         $('#game').append(form);
         shuffledPhotos.pop();
-        console.log(shuffledPhotos.length);
-        console.log(counter);
       }
       //else return, sorry message with correct name and display next image
       else{
@@ -115,7 +116,6 @@ $(document).ready(function(){
         $('#game').append(photo);
         $('#game').append(form);
         shuffledPhotos.pop();
-        console.log(shuffledPhotos.length);
       }
 
   });
