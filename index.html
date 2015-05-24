@@ -1,24 +1,35 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>g10 Quiz</title>
-    <link rel="stylesheet" href="assets/css/app.css">
-  </head>
-  <body id="main">
-    <div id="game">
-      <div id="banner">
-        <h1>Welcome to the g10 QuizZAP!!!</h1>
-        <p>
-          Click the button below to reveal a pic of a student and guess their name in the form to see if you know who's who
-        </p>
-      </div>
-      <form action="#" method="get">
-        <input type="submit" name="new_student" class="start" value="Let's Play!">
-      </form>
+<head>
+  <meta charset="utf-8">
+  <title>g10 Quiz</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body id="main">
+  <div id="game">
+    <div id="banner">
+      <h1>Welcome to the g10 QuizZAP!!!</h1>
+      <p>
+        Do you know everyone in the class?!?
+      </p>
     </div>
+    <div id="instructions">
+      <p>Click the button below to start playing</p>
+      <p>The game is timed and for each wrong name,</p>
+      <p>you will get 5 seconds added to your total time!</p>
+      <br>
+      <p>If you want to really go fast, try not to click:</p>
+      <p>Each time a new photo loads, hit tab to focus on the text field.</p>
+      <p> When you've typed the name hit enter to submit your answer.</p>
+      <br>
+      <p> Capital letters don't matter in this game, but spelling does</p>
+    </div>
+    <form action="#" method="get">
+      <input type="submit" name="new_student" class="start" value="Let's Play!" autofocus>
+    </form>
+  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
-  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
+</body>
 </html>

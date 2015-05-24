@@ -31,94 +31,123 @@ $(document).ready(function(){
                   ['zack','assets/images/card_zack.jpg']];
 
 
-  var maxScore = photoSet.length;
 
+  var maxScore = photoSet.length;
+  var counter = 0;
+  var penalty = 0;
   // random shuffle of array: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   // perhaps first create a shuffled array, then loop through the new array
   function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
     }
     return array;
   }
-  var counter = 0;
+  // set a new variable to a shuffled set of photos
   var shuffledPhotos = shuffleArray(photoSet);
+  // set a variable to the html needed to generate a form
   var form = '<div class="form">\
-              <form action="#" method="get">\
-              <br>Who is this? (first name only)<br> \
-              <input type="text" name="name" autofocus><br><br> \
-              <input type="submit" name="submit" value="Submit" class="try">\
-              </form></div>';
+    <form action="#" method="get">\
+      <p>Who is this? (first name only)</p> \
+      <p><input type="text" name="name" autofocus></p> \
+      <input type="submit" name="submit" value="Submit" class="try">\
+    </form></div>';
+  // set a variable to the html needed to generate a form that will reload the page when the user wants to play again
   var playAgain = '<form action="index.html" method="get"><input class="retry" type="submit" name="again" value="Play Again!"></form>';
 
-  // start the game when the user clicks the button
+  // **************************************************
+  // * start the game when the user clicks the button *
+  // **************************************************
   $('.start').click(function(){
+    var startTime = new Date();
     event.preventDefault();
+    // get the last element from the shuffledPhotos from the array
+    //setting the alt as the student's name and the src as the image path
     var photo = '<img class="photo" alt="'+shuffledPhotos[shuffledPhotos.length-1][0]+'" src="'+shuffledPhotos[shuffledPhotos.length-1][1]+'">';
-    //start loop around photo array
+    //remove start button
     $('.start').remove();
-    //$('#game').append(score);
+    $('#instructions').remove();
+    //add a photo and guess form
     $('#game').append(photo);
     $('#game').append(form);
+    //remove the last element from shuffledPhotos array (the one that was just displayed)
     shuffledPhotos.pop();
-  });
 
+
+  // when the user clicks a button, evaluate their answer, clear the existing html and insert new
+  // html with updated scoreboard and a winner or loser message.
   $(document).on('click', '.try', function(){
     event.preventDefault();
-    //if input matches the name, return a winner message and display next image
+    //set some variables for comparing the user input to the alt value in the img
     var userInput = $('input[name="name"]').val();
     var nameGuess = userInput.toLowerCase();
     var answer = $('img').attr('alt');
     var displayAnswer = answer.charAt(0).toUpperCase() + answer.slice(1);
     var winner = '<h3 class="message">Nice Work!</h3>';
     var loser = '<h3 class="message">Sorry, that was actually '+displayAnswer+'</h3>';
-
-
     var final = '<h3 class="finalscore">Final Score:  '+counter+' / '+maxScore+'</h3>';
+
+
     if (shuffledPhotos.length>0){
+      //if there are still photos in the array, reset the photo variable to the current last element in the array
       var photo = '<img class="photo" alt="'+shuffledPhotos[shuffledPhotos.length-1][0]+'" src="'+shuffledPhotos[shuffledPhotos.length-1][1]+'">';
     }
-      if (shuffledPhotos.length === 0) {
-        $('.form').remove();
-        $('.photo').remove();
-        $('.score').remove();
-        $('#game').append(final);
-        $('#game').append('<h3>Game over!</h3>');
-        $('#game').append(playAgain);
+    if (shuffledPhotos.length === 0) {
+      //if the array is empty (all photos have been shown) clear the board and put the game over message up
+      //along with a button to restart the game
+      if (nameGuess === answer) {
+      }else{
+        penalty = penalty + 5;
       }
-      else if (nameGuess === answer) {
-        counter = counter + 1;
-        $('.try').remove();
-        $('.photo').remove();
-        $('.form').remove();
-        $('.message').remove();
-        $('.score').remove();
-        var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
-        $('#game').append(winner);
-        $('#game').append(score);
-        $('#game').append(photo);
-        $('#game').append(form);
-        shuffledPhotos.pop();
-      }
-      //else return, sorry message with correct name and display next image
-      else{
-        $('.try').remove();
-        $('.photo').remove();
-        $('.form').remove();
-        $('.message').remove();
-        $('.score').remove();
-        var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
-        $('#game').append(loser);
-        $('#game').append(score);
-        $('#game').append(photo);
-        $('#game').append(form);
-        shuffledPhotos.pop();
-      }
-
+      $('.form').remove();
+      $('.photo').remove();
+      $('.score').remove();
+      var endTime = new Date();
+      var totalTime = (endTime.getTime() - startTime.getTime())/1000;
+      console.log(totalTime);
+      $('#game').append(final);
+      console.log(penalty);
+      $('#game').append('<h3>Your time (with penalties): '+(Number(penalty)+Number(totalTime.toFixed(2)))+' Seconds')
+      $('#game').append('<h3>Game over!</h3>');
+      $('#game').append(playAgain);
+    }
+    else if (nameGuess === answer) {
+      //if the user guesses correctly, add one to the score counter, clear the board, put up the next photo
+      //and remove the last photo from the array
+      counter = counter + 1;
+      $('.try').remove();
+      $('.photo').remove();
+      $('.form').remove();
+      $('.message').remove();
+      $('.score').remove();
+      var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
+      $('#game').append(winner);
+      $('#game').append(score);
+      $('#game').append(photo);
+      $('#game').append(form);
+      shuffledPhotos.pop();
+    }
+    else{
+      penalty = penalty + 5;
+      //if the user guesses wrong, clear the board, put up the next photo
+      //tell the user who the last photo was of, and remove the last photo from the array
+      $('.try').remove();
+      $('.photo').remove();
+      $('.form').remove();
+      $('.message').remove();
+      $('.score').remove();
+      var score = '<h3 class="score">Your score so far:  '+counter+' / '+maxScore+'</h3>';
+      $('#game').append(loser);
+      $('#game').append(score);
+      $('#game').append(photo);
+      $('#game').append(form);
+      shuffledPhotos.pop();
+    }
   });
 
+});
 
 });

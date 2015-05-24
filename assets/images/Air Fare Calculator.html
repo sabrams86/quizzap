@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://steven-abrams-air-calc.s3-website-us-west-2.amazonaws.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Air Fare Calculator</title>
+    <link rel="stylesheet" href="http://steven-abrams-air-calc.s3-website-us-west-2.amazonaws.com/css/style.css">
+  </head>
+  <body>
+    <h1 class="centered">Air Fare Calculator</h1>
+
+    <form class="centered" action="http://steven-abrams-air-calc.s3-website-us-west-2.amazonaws.com/#" method="get">
+      <div class="left">
+        <p><label for="departure">Departure City</label></p>
+        <p>
+          <select id="departure">
+            <option value="New York">New York</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Los Angeles">Los Angeles</option>
+          </select>
+        </p>
+      </div>
+      <div class="right">
+        <p><label for="arrival">Arrival City</label></p>
+        <p>
+          <select id="arrival">
+            <option value="New York">New York</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Los Angeles">Los Angeles</option>
+          </select>
+        </p>
+      </div>
+      <p><label for="bags">Number of Checked Bags ($25 / bag)</label></p>
+      <p><input type="number" name="bags" id="bags"></p>
+
+      <p><label for="class">Class</label></p>
+      <p>
+        <select id="class">
+          <option value="coach">Coach</option>
+          <option value="business">Business (+ $200)</option>
+          <option value="first">First (+ $500)</option>
+        </select>
+      </p>
+
+      <p><input type="checkbox" name="wifi" id="wifi"><label for="wifi">Wifi ($12)</label></p>
+
+      <p><label for="dcode">Discount Code</label></p>
+      <p><input type="text" name="discount" id="dcode"></p>
+
+      <input class="button" type="submit" name="submit" value="Calculate Price">
+    </form>
+
+    <div class="total centered"></div>
+
+    <script type="text/javascript" src="./Air Fare Calculator_files/logic.js"></script>
+    <script type="text/javascript" src="./Air Fare Calculator_files/app.js"></script>
+  
+
+</body></html>
