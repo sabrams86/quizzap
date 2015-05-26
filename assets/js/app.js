@@ -73,6 +73,7 @@ $(document).ready(function(){
     //add a photo and guess form
     $('#game').append(photo);
     $('#game').append(form);
+    document.getElementsByName('name')[0].focus();
     //remove the last element from shuffledPhotos array (the one that was just displayed)
     shuffledPhotos.pop();
 
@@ -131,6 +132,7 @@ $(document).ready(function(){
       $('#game').append(score);
       $('#game').append(photo);
       $('#game').append(form);
+      document.getElementsByName('name')[0].focus();
       shuffledPhotos.pop();
     }
     else{
@@ -147,6 +149,7 @@ $(document).ready(function(){
       $('#game').append(score);
       $('#game').append(photo);
       $('#game').append(form);
+      document.getElementsByName('name')[0].focus();
       shuffledPhotos.pop();
     }
   });
